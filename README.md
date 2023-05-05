@@ -8,12 +8,13 @@ Code for tools and automation used internally by the Mobile Technologies Core.
 
 
 ## Quick Start Guide
-Coming soon!
++ The code on this repo is organized by subject areas and technologies.
++ See the README file inside each sub-folder for further instructions.
 
 
 
 ## Documentation
-Coming soon!
+None.
 
 
 ## Additional Resources
