@@ -3,7 +3,7 @@
 # Get MCommunity Group Membership
 
 ## Description
-This Power Automate Desktop flow shows how to connect to the University of Michigan API Directory (Apigee), how to authentication using OAuth2 Client Credentials, and how to retrieve a list of members from a group using the MCommunityGroups API.
+This Power Automate Desktop flow shows how to connect to the University of Michigan API Directory (Apigee), how to authenticate using OAuth2 Client Credentials, and how to retrieve a list of members from a group using the MCommunityGroups API.
 
 
 
