@@ -1,0 +1,17 @@
+**REGION ENTER API DETAILS HERE
+SET API_Endpoint_URL TO $'''https://gw.api.it.umich.edu/um/MCommunityGroups/Members'''
+SET API_Scope TO $'''mcommunitygroups'''
+IF IsEmpty($'''API_Search_Parameter_1''') THEN
+    SET API_Search_Parameter_1 TO $'''efdc-mobiletech'''
+END
+**ENDREGION
+**REGION Authenticate and Get Access Token
+CALL API_Authentication
+**ENDREGION
+SET API_Invoke_URL TO $'''%API_Endpoint_URL%/%API_Search_Parameter_1%'''
+Web.InvokeWebService.InvokeWebService Url: API_Invoke_URL Method: Web.Method.Get Accept: $'''application/json''' ContentType: $'''application/x-www-form-urlencoded''' CustomHeaders: $'''Authorization: Bearer %API_Token%
+Content-Length: 0''' ConnectionTimeout: 10 FollowRedirection: True ClearCookies: False FailOnErrorStatus: True EncodeRequestBody: True UserAgent: $'''Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.21) Gecko/20100312 Firefox/3.6''' Encoding: Web.Encoding.AutoDetect AcceptUntrustedCertificates: True ResponseHeaders=> APIResponseHeaders Response=> API_Search_Results_JSON StatusCode=> APIResponseStatusCode
+    ON ERROR
+        SET API_Search_Results_JSON TO $'''{\"error\": \"\"}'''
+    END
+Variables.ConvertJsonToCustomObject Json: API_Search_Results_JSON CustomObject=> API_Search_Results_Object

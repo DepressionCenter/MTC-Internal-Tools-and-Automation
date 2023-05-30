@@ -1,0 +1,40 @@
+**REGION Get MCommunity Info for a specific group
+CALL Get_MCommunity_Group_Info
+SET MemberListCSV TO API_Search_Results_Object.MCommunityInfo.MCommunityGroupData.MemberList
+Text.SplitText.SplitWithDelimiter Text: MemberListCSV CustomDelimiter: $''',''' IsRegEx: False Result=> MemberList
+LOOP FOREACH CurrentItem IN MemberList
+    IF Contains(CurrentItem, $'''@''', False) THEN
+        Variables.RemoveItemFromList.RemoveItemFromListByValue Item: CurrentItem ItemMatchAllOccurrences: True List: MemberList
+    END
+END
+@@statistics_Input_Text: '2'
+@@statistics_TextBlock: '1'
+Display.ShowCustomDialog CardTemplateJson: '''{
+  \"type\": \"AdaptiveCard\",
+  \"version\": \"1.4\",
+  \"id\": \"AdaptiveCard\",
+  \"body\": [
+    {
+      \"type\": \"Input.Text\",
+      \"id\": \"Text Member List\",
+      \"value\": \"${Text_Member_List_Value}\",
+      \"isMultiline\": true,
+      \"label\": \"${Text_Member_List_Label}\"
+    },
+    {
+      \"type\": \"TextBlock\",
+      \"id\": \"File Output\",
+      \"text\": \"${File_Output_Text}\",
+      \"wrap\": true
+    },
+    {
+      \"type\": \"Input.Text\",
+      \"id\": \"Text Results\",
+      \"value\": \"${Text_Results_Value}\",
+      \"isMultiline\": true,
+      \"label\": \"${Text_Results_Label}\"
+    }
+  ]
+}''' @Text_Member_List_Label: $'''Member List:''' @Text_Member_List_Value: MemberList @File_Output_Text: $'''Member List will be saved to:  c:\\tmp\\%API_Search_Parameter_1%.txt''' @Text_Results_Label: $'''Full API Results:''' @Text_Results_Value: API_Search_Results_JSON
+**ENDREGION
+File.WriteText File: $'''c:\\tmp\\%API_Search_Parameter_1%.txt''' TextToWrite: MemberList AppendNewLine: True IfFileExists: File.IfFileExists.Overwrite Encoding: File.FileEncoding.UTF8

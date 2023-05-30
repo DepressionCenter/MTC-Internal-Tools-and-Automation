@@ -1,0 +1,11 @@
+SET API_Auth_URL TO $'''https://gw.api.it.umich.edu/um/oauth2/token'''
+IF IsEmpty(API_Username) THEN
+    Display.InputDialog Title: $'''API Key''' Message: $'''Enter the API Key (username):''' InputType: Display.InputType.Password IsTopMost: False UserInput=> API_Username
+END
+IF IsEmpty(API_Password) THEN
+    Display.InputDialog Title: $'''API Secret''' Message: $'''Enter the API Secret (password):''' InputType: Display.InputType.Password IsTopMost: False UserInput=> API_Password
+END
+Variables.CreateNewDatatable InputTable: { ^['Param', 'Value'], [$'''scope''', API_Scope], [$'''grant_type''', $'''client_credentials'''] } DataTable=> APIAuthHeadersDataTable
+Web.DownloadFromWeb.DownloadUsePostAndAuth Url: API_Auth_URL Parameters: APIAuthHeadersDataTable ConnectionTimeout: 10 FollowRedirection: True ClearCookies: True UserAgent: $'''Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.21) Gecko/20100312 Firefox/3.6''' Encoding: Web.Encoding.AutoDetect AcceptUntrustedCertificates: True UserName: API_Username Password: API_Password WebPageText=> APIAuthResponseBody
+Variables.ConvertJsonToCustomObject Json: APIAuthResponseBody CustomObject=> APIAuthResponseBodyObject
+SET API_Token TO APIAuthResponseBodyObject.access_token
