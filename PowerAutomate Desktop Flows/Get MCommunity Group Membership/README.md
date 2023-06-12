@@ -10,7 +10,7 @@ This Power Automate Desktop flow shows how to connect to the University of Michi
 ## Quick Start Guide
 + Get an API key for MCommunityGroups from the U-M API Directory (https://dir.api.it.umich.edu/)
 + Create a new desktop flow with three sub-flows: Main, Get_MCommunity_Group_Info, and API_Authentication
-+ Copy & paste the flow contents from the /src directory into each sub-flow
++ Copy & paste the flow contents from the /src directory into each sub-flow (Power Automate will automatically convert the text source code into shapes)
 + Create 4 input variables: API_Username (text, sensitive), API_Password (text, sensitive), API_Search_Parameter_1 (text), and MemberList (list)
 + Enter your API secret and key from API Directory into the API_Username and API_Password variables
 + Enter your MCommunity group name (without @umich.edu) in the API_Search_Parameter_1 variable
@@ -31,7 +31,7 @@ This Power Automate Desktop flow shows how to connect to the University of Michi
 ### Create and customize desktop flows
 + Open the PowerAutomate Desktop app and login to the UMich environment. As of this writing, the Michigan Medicine environment has some restrictions that may not allow you to connect to APIs.
 + Create a new desktop flow with three sub-flows: Main, Get_MCommunity_Group_Info, and API_Authentication
-+ Copy & paste the flow contents from the /src directory into each sub-flow
++ Copy & paste the flow contents from the /src directory into each sub-flow (Power Automate will automatically convert the text source code into shapes)
 + ![Main flow](images/Main-flow.png)
 + ![Get flow](images/Get_MCommunity_Group_Info-subflow.png)
 + ![API Authentication flow](images/API_Authentication-subflow.png)
