@@ -1,0 +1,16 @@
+{
+	"Groups" : [
+					"efdc-mobiletech@umich.edu",
+					"efdc-trackmaster-data",
+					"MCN.-.MobileTech",
+					"MDEN.-.MTC",
+					"DIGIT-MI-MTC"
+				],
+				
+	"API_Username" : "Enter your API key from dir.api.it.umich.edu",
+	"API_Password" : "Enter your API secret from dir.api.it.umich.edu",
+	
+	"API_Auth_URL" : "https://gw.api.it.umich.edu/um/oauth2/token",
+	"API_Endpoint_URL" : "https://gw.api.it.umich.edu/um/MCommunityGroups/Members",
+	"API_Scope" : "mcommunitygroups"
+}
