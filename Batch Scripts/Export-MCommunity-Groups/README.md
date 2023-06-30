@@ -9,14 +9,14 @@ Please note that this script has not been tested - we are sharing the code early
 
 ## Quick Start Guide
 + Download Export-MCommunity-Groups.bat and Export-MCommunity-Groups-Config.txt
-+ Edit Export-MCommunity-Groups-Config.txt (in Notepad or another text editor), and enter a list of group names (one per line).
++ Edit Export-MCommunity-Groups-Config.txt (in Notepad or another text editor), and enter a list of group names (one per line) without @umich.edu.
 + Run the script. It will generate one file per group (group_name.csv), containing the members for that group (one per line).
 
 
 ## Documentation
-+++ *Export-MCommunity-Groups.bat* contains the script that will get group members via the "ldapsearch" command. No MCommunity API access required (but you may have to be on the VPN to run it).
-+++ *Export-MCommunity-Groups-Config.txt* contains a list og group names, one per line. Change the list of gorup names to suit your needs. You can get the group name from [MCommunity](https://mcommunity.umich.edu/my-groups) by copying the Group Email. You may enter the group name with or without the @umich.edu portion.
-+++ The Mobile Tech Core plans to use this script to refresh group memberships in SharePoint. To do this, we first sync a Document Library to our computer so we can run the script in it every week. Then, we use Power Autoamte (cloud) to pickup the files and sync to specific Lists in SharePoint. Contact us for details.
++ *Export-MCommunity-Groups.bat* contains the script that will get group members via the "ldapsearch" command. No MCommunity API access required (but you may have to be on the VPN to run it).
++ *Export-MCommunity-Groups-Config.txt* contains a list og group names, one per line. Change the list of gorup names to suit your needs. You can get the group name from [MCommunity](https://mcommunity.umich.edu/my-groups) by copying the Group Email. You *must* enter the group name *without* the @umich.edu portion.
++ The Mobile Tech Core plans to use this script to refresh group memberships in SharePoint. To do this, we first sync a Document Library to our computer so we can run the script in it every week. Then, we use Power Autoamte (cloud) to pickup the files and sync to specific Lists in SharePoint. Contact us for details.
 
 ## Additional Resources
 + This script was developed for the [Track Master](https://github.com/DepressionCenter/TrackMaster) project.
