@@ -1,16 +1,16 @@
 ![Depression Center Logo](https://github.com/DepressionCenter/.github/blob/main/images/EFDCLogo_375w.png "depressioncenter.org")
 
-# Batch Scripts
+# Shell Scripts
 
 ## Description
-This directory contains Unix/Linux shell scripts scripts (Bash) for various uses cases, such as calling APIs in bulk. These scripts can be used to automate certain tasks via Windows Task Manager.
+This directory contains Unix/Linux shell scripts scripts (Bash) for various uses cases, such as calling APIs in bulk. These scripts can be used to automate certain tasks via Docker containers, Cron scheduler, or other scripts.
 
 
 
 ## Quick Start Guide
 + Navigate to each sub-directory
 + Follow the instructions in the individual README.md file
-+ For the most part, you can run the .sh file directly by downloading and double-cliking it. Some scripts may also have a -Config.txt or -Config.json file, which you need to download to the same directory as the .bat file and edit the contents.
++ For the most part, you can run the .sh file directly by downloading and double-cliking it. Some scripts may also have a -Config.txt or -Config.json file, which you need to download to the same directory as the .sh file and edit the contents.
 
 
 ## Documentation
