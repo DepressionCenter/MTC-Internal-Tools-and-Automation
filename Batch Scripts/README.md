@@ -17,8 +17,7 @@ This directory contains MS Windows batch scripts for various uses cases, such as
 + See individual sub-directories.
 
 ## Additional Resources
-+ University of Michigan API Directory - https://dir.api.it.umich.edu/
-+ MCommunityGroups API documentation - https://dir.api.it.umich.edu/docs/mcommunitygroups/1/overview
++ None
 
 
 
