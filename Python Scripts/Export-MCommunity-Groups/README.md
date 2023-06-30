@@ -15,9 +15,9 @@ Python script to export MCommunity group members to a file, using the MCommunity
 
 
 ## Documentation
-+++ *Export-MCommunity-Groups.py* contains the script that will connect to the MCommunity API
-+++ *Export-MCommunity-Groups-Config.json* contains settings that the script needs to run. Change the list of gorup names to suit your needs. You can get the group name from [MCommunity](https://mcommunity.umich.edu/my-groups) by copying the Group Email. You may enter the group name with or without the @umich.edu portion. To get an API key, follow the instructions in the [University of Michigan API Directory](https://dir.api.it.umich.edu/).
-+++ The Mobile Tech Core plans to use this script to refresh group memberships in SharePoint. To do this, we first sync a Document Library to our computer so we can run the script in it every week. Then, we use Power Autoamte (cloud) to pickup the files and sync to specific Lists in SharePoint. Contact us for details.
++ *Export-MCommunity-Groups.py* contains the script that will connect to the MCommunity API
++ *Export-MCommunity-Groups-Config.json* contains settings that the script needs to run. Change the list of gorup names to suit your needs. You can get the group name from [MCommunity](https://mcommunity.umich.edu/my-groups) by copying the Group Email. You may enter the group name with or without the @umich.edu portion. To get an API key, follow the instructions in the [University of Michigan API Directory](https://dir.api.it.umich.edu/).
++ The Mobile Tech Core plans to use this script to refresh group memberships in SharePoint. To do this, we first sync a Document Library to our computer so we can run the script in it every week. Then, we use Power Autoamte (cloud) to pickup the files and sync to specific Lists in SharePoint. Contact us for details.
 
 ## Additional Resources
 + This script was developed for the [Track Master](https://github.com/DepressionCenter/TrackMaster) project.
