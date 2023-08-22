@@ -14,11 +14,11 @@ Code for tools and automation used internally by the Mobile Technologies Core.
 
 
 ## Documentation
-Most documentation is available at the Eisenberg Family Depression Center's [Knowledge Base](https://teamdynamix.umich.edu/TDClient/210/Portal/Home/).
+Most documentation is available at the Eisenberg Family Depression Center's [Knowledge Base](https://teamdynamix.umich.edu/TDClient/210/DepressionCenter/Home/).
 
 
 ## Additional Resources
-+ Mobile Technologies KB Articles - [Code Documentation](https://teamdynamix.umich.edu/TDClient/210/Portal/KB/?CategoryID=847)
++ Mobile Technologies KB Articles - [Code Documentation](https://teamdynamix.umich.edu/TDClient/210/DepressionCenter/KB/?CategoryID=847)
 + [MDEN Videos](https://www.youtube.com/playlist?list=PLaZPPm5aSPgDtNBZhcT91AWgH_frqQA0v)
 
 
