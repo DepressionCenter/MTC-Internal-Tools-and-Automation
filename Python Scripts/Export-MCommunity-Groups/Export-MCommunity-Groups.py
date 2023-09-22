@@ -54,17 +54,24 @@ for group_name in config_data["Groups"]:
         
         # Save group members to file
         try:
-            group_members = API_Response["MCommunityInfo"]["MCommunityGroupData"]["MemberList"]           
+            group_members = API_Response["MCommunityInfo"]["MCommunityGroupData"]["MemberList"]
+            print(API_Response)
         except:
             print("Group not found: " + group_name)
         try:
             csv_reader = csv.reader(StringIO(group_members), delimiter=",")
+            tmpMemberList = []
             for row in csv_reader:
                 with open(group_name+".csv", "a") as group_membership_file:
                     for m in row:
+                        if m.find("<")>1:
+                            m = m.split("<")[1].replace(">","")
                         m = m.replace("@umich.edu","").replace("@med.umich.edu","")
-                        group_membership_file.write(f'{m}\n')
+                        if m not in tmpMemberList:
+                            tmpMemberList.append(m)
+                            group_membership_file.write(f'{m}\n')
                     group_membership_file.close()
+            tmpMemberList.clear()
         except:
             print("Unknown error while processing group and/or saving to file.")
         print("")
