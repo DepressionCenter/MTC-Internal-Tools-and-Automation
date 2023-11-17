@@ -44,7 +44,9 @@ $ldaptree    = "ou=Groups,dc=umich,dc=edu";
 $memberArray = array();
 $memberArrayString = "";
 $errorMessage = "";
-$groupName = "";
+$groupName = ""; // from input params
+$groupNameLDAPSanitized = ""; // sanitized for use in LDAP search queries
+$groupNameHTMLSanitized = ""; // sanitized for displaying in RSS feed
 
 
 // Sanitize function
@@ -58,8 +60,7 @@ function sanitizeLdapQueryCN($val) {
 					 '—' => '-' // Long dash to short dash
 					 );
 
-	$val = str_replace("@umich.edu", "", $val);
-	$val = str_replace("@med.umich.edu", "", $val);
+	$val = explode("@", $val, 2)[0];
     $returnValue = str_replace(array_keys($sanitized),array_values($sanitized),$val);
 	
 	return $returnValue;
@@ -68,7 +69,9 @@ function sanitizeLdapQueryCN($val) {
 
 // Get query string parameters and Sanitize them
 if (isset($_GET['groupName'])) {
-	$groupName = sanitizeLdapQueryCN($_GET['groupName']);
+	$groupName = trim(explode("@", trim($_GET['groupName']), 2)[0]); // Remove @umich.edu and @med.umich.edu
+	$groupNameLDAPSanitized = sanitizeLdapQueryCN($groupName); // Sanitize for use in LDAP search query
+	$groupNameHTMLSanitized = htmlentities($groupName, ENT_QUOTES | ENT_QUOTES,ENT_XHTML); // Sanitize for displaying in RSS feed
 }
 if($groupName=="") {
 		$errorMessage .= "Group name was not provided. \nPlease provide a valid MCommunity group name or email address, e.g.:  /GetMCommunityGroupMembersRSS?groupName=MyMCommunityGroup@umich.edu \n";
@@ -89,7 +92,7 @@ try {
 		$ldapSearchResult = ldap_search(
 								$ldapConn,
 								$ldaptree,
-								"(cn=".$groupName.")",
+								"(cn=".$groupNameLDAPSanitized.")",
 								array("dn","cn","displayName","mail","umichgroupemail","umichprivate","description","membersonly","member","rfc822mail")
 								) or die ("Error in search query.");
         $ldapData = ldap_get_entries($ldapConn, $ldapSearchResult);
@@ -114,7 +117,19 @@ if ($groupName!="" and $errorMessage=="") {
 			if (isset($ldapData[0]["member"]) and $ldapData[0]["member"]["count"]>0) {
 				foreach($ldapData[0]["member"] as $x => $mbr) {
 					if($x != "count") {
-						$cleanMbr = str_replace( "@umich.edu", "", str_replace("@med.umich.edu", "", explode(",",str_replace("uid=","",$mbr),2)[0] ) );
+						$cleanMbr = strtolower(
+							trim(
+								str_replace(
+									"@umich.edu",
+									"",
+									str_replace(
+										"@med.umich.edu",
+										"",
+										explode(",",str_replace("uid=","",$mbr),2)[0]
+										)
+									)
+								)
+							);
 						// Append to memberArray only if not already there
 						$memberArray = array_unique(array_merge($memberArray, array($cleanMbr)));
 						
@@ -126,7 +141,19 @@ if ($groupName!="" and $errorMessage=="") {
 			if (isset($ldapData[0]["rfc822mail"]) and $ldapData[0]["rfc822mail"]["count"]>0) {
 				foreach($ldapData[0]["rfc822mail"] as $x => $mbr) {
 					if($x != "count") {
-						$cleanMbr = str_replace( "@umich.edu", "", str_replace("@med.umich.edu", "", explode(",",str_replace("uid=","",$mbr),2)[0] ) );
+						$cleanMbr = strtolower(
+							trim(
+								str_replace(
+									"@umich.edu",
+									"",
+									str_replace(
+										"@med.umich.edu",
+										"",
+										explode(",",str_replace("uid=","",$mbr),2)[0]
+										)
+									)
+								)
+							);
 						// Append to memberArray only if not already there
 						$memberArray = array_unique(array_merge($memberArray, array($cleanMbr)));
 						
@@ -134,7 +161,12 @@ if ($groupName!="" and $errorMessage=="") {
 				}
 			}
 			
-			// Convert member array to CSV string
+			// Final array sort and deduplication, just in case something above did not work
+			sort($memberArray, SORT_STRING|SORT_FLAG_CASE);
+			$memberArray = array_unique($memberArray, SORT_STRING|SORT_FLAG_CASE);
+			
+			
+			// Convert member array to CSV string to return in RSS feed
 			if ($errorMessage=="") {
 				$memberArrayString = "";
 				foreach($memberArray as $mbr) {
@@ -145,7 +177,7 @@ if ($groupName!="" and $errorMessage=="") {
 		}
 	} else {
 		// No results, so return error
-		$errorMessage .= "Group not found: '".htmlentities($groupName, ENT_QUOTES | ENT_QUOTES,ENT_XHTML)."' \n";
+		$errorMessage .= "Group not found: '".$groupNameHTMLSanitized."' \n";
 	}
 }
 
@@ -165,9 +197,9 @@ if ($groupName!="" and $errorMessage=="") {
  <comments><?php echo $errorMessage; ?></comments>
  
  <item>
-	<title><?php if($groupName=="") {echo "InvalidGroupName";} else {echo htmlentities($groupName, ENT_QUOTES | ENT_QUOTES,ENT_XHTML);} ?></title>
-	<link><?php if($groupName!="" and $errorMessage=="") { echo "https://mcommunity.umich.edu/group/".htmlentities($groupName, ENT_QUOTES | ENT_QUOTES,ENT_XHTML); } ?></link>
-	<source><?php if($groupName!="" and $errorMessage=="") { echo "https://mcommunity.umich.edu/group/".htmlentities($groupName, ENT_QUOTES | ENT_QUOTES,ENT_XHTML); } ?></source>
+	<title><?php if($groupName=="") {echo "InvalidGroupName";} else {echo $groupNameHTMLSanitized;} ?></title>
+	<link><?php if($groupName!="" and $errorMessage=="") { echo "https://mcommunity.umich.edu/group/".str_replace(" ","%20",$groupName); } ?></link>
+	<source><?php if($groupName!="" and $errorMessage=="") { echo "https://mcommunity.umich.edu/group/".str_replace(" ","%20",$groupName); } ?></source>
 	<pubDate><?php date('r'); ?></pubDate>
 	<description><?php echo $memberArrayString; ?></description>
 	<comments><?php echo $errorMessage; ?></comments>
