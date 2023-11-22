@@ -11,7 +11,7 @@ Code used by the automation and APIs web server from the Mobile Technologies Cor
 + Copy all files in the *html* directory to your web server root (e.g. /var/www or /Public/html).
 + Note that PHP 8 is required for all .php scripts, and Python 3.x or all .py scripts.
 + Call the respective webhook or API from a web browser, using the URL for your web server.
-  + e.g. To use the MCommunity RSS API on our development server, visit: https://efdc-automation.web.itd.umich.edu/api/GetMCommunityGroupMembersRSS.php?mobiletech@umich.edu
+  + e.g. To use the MCommunity RSS API on our development server, visit: https://efdc-automation.web.itd.umich.edu/api/GetMCommunityGroupMembersRSS.php?groupName=efdc-mobiletech@umich.edu
 
 
 
