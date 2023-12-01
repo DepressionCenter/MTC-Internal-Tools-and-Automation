@@ -4,7 +4,8 @@
 	Title: EFDC GetMCommunityGroupMembersRSS Web Service
 	Summary: Gets members of public MCommunity groups in RSS format (intended for consumption via PowerAutomate).
 	Author(s): Gabriel Mongefranco <mongefrg@umich.edu>
-	Last Modified Date: 11/16/2023
+	Created Date: 11/16/2023
+	Last Modified Date: 12/01/2023
 	
 	Return values:
 		Channel/Category - SUCCESS if successful, or ERROR otherwise
@@ -154,6 +155,9 @@ if ($groupName!="" and $errorMessage=="") {
 									)
 								)
 							);
+						// Extract email from optional MCommunity format: first last <email@domain.com>
+						$cleanMbr = str_replace( ">", "", preg_replace("/(.)*[<]+/i", "", $cleanMbr) );
+						
 						// Append to memberArray only if not already there
 						$memberArray = array_unique(array_merge($memberArray, array($cleanMbr)));
 						
