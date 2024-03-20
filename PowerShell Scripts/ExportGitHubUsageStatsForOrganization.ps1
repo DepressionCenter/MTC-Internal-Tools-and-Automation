@@ -14,8 +14,9 @@ $organizationName = 'ENTER_ORGANIZATION_NAME_HERE_WITHOUT_SPACES'
 $username = 'ENTER_GITHUB_USERNAME_HERE'
 # To use interactive login, leave the apiToken string blank and uncomment where indicated in the authentication section
 $apiToken = ConvertTo-SecureString 'ENTER_GITHUB_API_TOKEN_HERE' -AsPlainText -Force
-$jsonOutputPath = 'c:\GitHubStats\github-stats.json'
-$csvOutputPath = 'c:\GitHubStats\github-stats.csv'
+$jsonOutputPath = 'c:\GitHubStats\efdc-github-stats.json'
+$csvOutputPath = 'c:\GitHubStats\efdc-github-stats.csv'
+$csvRollingOutputPath = 'c:\GitHubStats\efdc-github-stats-rolling.csv'
 
 
 # Ensure you have PowerShellForGitHub module installed
@@ -111,10 +112,12 @@ $repos | ForEach-Object {$_.clone_traffic_uniques = (Get-GitHubCloneTraffic -Uri
 
 # Extract pertinent extracts and convert to array of objects for easy export
 Write-Host "Processing usage stats..."
+$DateCaptured = (Get-Date)
 $usageStats = @()
 foreach ($repo in $repos)
 {
 	$usageStats += [PSCustomObject]@{
+		DateCaptured = $DateCaptured
 		name = $repo.name
 		full_name = $repo.full_name
 		owner = $repo.owner.login
@@ -149,5 +152,7 @@ $usageStats | ConvertTo-Json | Out-File -FilePath $jsonOutputPath
 # Export only pertinent stats to CSV
 Write-Host "Saving results in CSV format at: $csvOutputPath"
 $usageStats | Export-Csv -Path $csvOutputPath -NoTypeInformation
+Write-Host "Saving cummulative results in CSV format at: $csvRollingOutputPath"
+$usageStats | Export-Csv -Path $csvRollingOutputPath -NoTypeInformation -Append
 
 Write-Host "Done."
