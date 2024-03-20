@@ -148,6 +148,6 @@ $usageStats | ConvertTo-Json | Out-File -FilePath $jsonOutputPath
 
 # Export only pertinent stats to CSV
 Write-Host "Saving results in CSV format at: $csvOutputPath"
-$usageStats | ConvertTo-Csv -NoTypeInformation | Out-File -FilePath $csvOutputPath
+$usageStats | Export-Csv -Path $csvOutputPath -NoTypeInformation
 
 Write-Host "Done."
