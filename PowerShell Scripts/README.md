@@ -1,6 +1,6 @@
 ![Depression Center Logo](https://github.com/DepressionCenter/.github/blob/main/images/EFDCLogo_375w.png "depressioncenter.org")
 
-# Batch Scripts
+# PowerShell Scripts
 
 ## Description
 This directory contains PowerShell scripts for various uses cases, such as calling APIs in bulk. These scripts can be used to automate certain tasks via Windows Task Manager.
@@ -9,15 +9,17 @@ This directory contains PowerShell scripts for various uses cases, such as calli
 
 ## Quick Start Guide
 + Navigate to each sub-directory
-+ Follow the instructions in the individual README.md file
-+ For the most part, you can run the .ps1 file directly by downloading and double-cliking it. Some scripts may also have a -Config.txt file, which you need to download to the same directory as the .ps1 file and edit the contents.
++ Follow the instructions in the individual script or README.md file
++ For the most part, you can run the .ps1 file directly by downloading and double-cliking it. Some scripts may also have a -Config.txt or -Config.json file, which you need to download to the same directory as the .ps1 file and edit the contents.
 
 
 ## Documentation
-+ See individual sub-directories.
++ [Export Git Hub Usage Stats For Organization](https://github.com/DepressionCenter/MTC-Internal-Tools-and-Automation/blob/main/PowerShell%20Scripts/ExportGitHubUsageStatsForOrganization.ps1). This PowerShell script can be used to export daily GitHub repository statistics, for all repositories under an organization (GitHub Enterprise). Simply download, edit the settings towards the top of the file (file paths, API key, Organization name, etc.), and run it. You can also schedule it as a Windows Task.
++ [Export TrackMaster Site Template](https://github.com/DepressionCenter/MTC-Internal-Tools-and-Automation/blob/main/PowerShell%20Scripts/ExportTrackMasterSiteTemplate.ps1). This PowerShell script can be used to copy one SharePoint site to another site, essentially building off a template. Download the script, change the settings towards the top of the file, and run it to export a SharePoint site (such as TrackMaster) to a site template, which can then be deployed to a different site. You must be an admin on the SharePoint site you wish to export.
+
 
 ## Additional Resources
-+ None
++ See additional Code documentation in our knowledge base at: https://teamdynamix.umich.edu/TDClient/210/DepressionCenter/KB/?CategoryID=1019
 
 
 
