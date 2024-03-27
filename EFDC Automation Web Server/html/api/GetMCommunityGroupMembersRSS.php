@@ -5,7 +5,7 @@
 	Summary: Gets members of public MCommunity groups in RSS format (intended for consumption via PowerAutomate).
 	Author(s): Gabriel Mongefranco <mongefrg@umich.edu>
 	Created Date: 11/16/2023
-	Last Modified Date: 12/01/2023
+	Last Modified Date: 03/27/2024
 	
 	Return values:
 		Channel/Category - SUCCESS if successful, or ERROR otherwise
@@ -194,9 +194,9 @@ if ($groupName!="" and $errorMessage=="") {
  <link>https://michmed.org/8NrNR</link>
  <docs>https://michmed.org/8NrNR</docs>
  <webMaster>efdc-mobiletech@umich.edu</webMaster>
- <copyright>© 2023 Regents of the University of Michigan</copyright>
- <lastBuildDate><?php date('r'); ?></lastBuildDate>
- <pubDate><?php date('r'); ?></pubDate>
+ <copyright>© 2023-2024 Regents of the University of Michigan</copyright>
+ <lastBuildDate><?php echo date('r'); ?></lastBuildDate>
+ <pubDate><?php echo date('r'); ?></pubDate>
  <ttl>720</ttl>
  <comments><?php echo $errorMessage; ?></comments>
  
@@ -204,7 +204,7 @@ if ($groupName!="" and $errorMessage=="") {
 	<title><?php if($groupName=="") {echo "InvalidGroupName";} else {echo $groupNameHTMLSanitized;} ?></title>
 	<link><?php if($groupName!="" and $errorMessage=="") { echo "https://mcommunity.umich.edu/group/".str_replace(" ","%20",$groupName); } ?></link>
 	<source><?php if($groupName!="" and $errorMessage=="") { echo "https://mcommunity.umich.edu/group/".str_replace(" ","%20",$groupName); } ?></source>
-	<pubDate><?php date('r'); ?></pubDate>
+	<pubDate><?php echo date('r'); ?></pubDate>
 	<description><?php echo $memberArrayString; ?></description>
 	<comments><?php echo $errorMessage; ?></comments>
 	<category><?php if($errorMessage=="") {echo "SUCCESS";} else {echo "ERROR";} ?></category>
