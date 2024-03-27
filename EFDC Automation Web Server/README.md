@@ -11,12 +11,52 @@ Code used by the automation and APIs web server from the Mobile Technologies Cor
 + Copy all files in the *html* directory to your web server root (e.g. /var/www or /Public/html).
 + Note that PHP 8 is required for all .php scripts, and Python 3.x or all .py scripts.
 + Call the respective webhook or API from a web browser, using the URL for your web server.
-  + e.g. To use the MCommunity RSS API on our development server, visit: https://efdc-automation.web.itd.umich.edu/api/GetMCommunityGroupMembersRSS.php?groupName=efdc-mobiletech@umich.edu
+  + To use the MCommunity RSS API, visit: https://efdc-automation.web.itd.umich.edu/api/GetMCommunityGroupMembersRSS.php?groupName=efdc-mobiletech@umich.edu
+  + To use the GitHub Organization Repositoies RSS API, visit: https://efdc-automation.web.itd.umich.edu/api/GetGitHubOrganizationRepositoriesRSS.php?orgName=DepressionCenter
 
 
 
 ## Documentation
-Most documentation is available at the Eisenberg Family Depression Center's [Knowledge Base](https://teamdynamix.umich.edu/TDClient/210/DepressionCenter/Home/).
+### html/api/GetMCommunityGroupMembersRSS.php
+	Title: *EFDC GetMCommunityGroupMembersRSS Web Service*
+	Summary: Gets members of public MCommunity groups in RSS format (intended for consumption via PowerAutomate).
+	Author(s): Gabriel Mongefranco <mongefrg@umich.edu>
+	Created Date: 11/16/2023
+	Last Modified Date: 03/27/2024
+	
+	Return values:
+		Channel/Category - SUCCESS if successful, or ERROR otherwise
+		Channel/Comments - error message, if any
+		Item/Title - group name (sanitized)
+		Item/Description - unique group members in CSV format, including members of sub-groups and external members
+		Item/Category - SUCCESS if successful, or ERROR otherwise
+		Item/Comments - error message, if any
+		
+	Remarks:
+		The MCommunity Group's visibility needs to be set to Public in MCommunity
+		(Settings -> Who can view members -> Anyone with an @umich.edu address)
+		For Python and Power Automate Desktop versions, see:
+		https://github.com/DepressionCenter/MTC-Internal-Tools-and-Automation/tree/main
+
+
+### html/api/GetGitHubOrganizationRepositoriesRSS.php
+	Title: *EFDC GetGitHubOrganizationRepositoriesRSS Web Service*
+	Summary: Gets a list of public GitHub repos belonging to the specified organization and returns it in RSS format.
+	Author(s): Gabriel Mongefranco <mongefrg@umich.edu>
+	Created Date: 3/27/2024
+	Last Modified Date: 3/27/2024
+	
+	Return values:
+		Channel/Category - SUCCESS if successful, or ERROR otherwise
+		Channel/Comments - error message, if any
+		Item/Title - repository name (sanitized)
+		Item/Description - repository description (sanitized)
+		Item/Category - SUCCESS if successful, or ERROR otherwise
+		Item/Comments - error message, if any
+		
+	Remarks:
+		Only public repos can be retrieved without an API key.
+
 
 
 ## Additional Resources
