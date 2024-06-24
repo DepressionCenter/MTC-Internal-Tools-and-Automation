@@ -1,0 +1,1 @@
+java -Djava.library.path=c:\datadict\schemaspy\lib -jar "C:\datadict\schemaspy\schemaspy-6.2.4.jar" -dp "C:\datadict\schemaspy\lib\sqlite-jdbc-3.45.2.0.jar" -t sqlite-xerial -desc "<database description>" -o "c:\datadict\html\<database>" -ahic  -norows  -lq  -nologo -db "c:\datadict\<database>.db" -all -ssos
