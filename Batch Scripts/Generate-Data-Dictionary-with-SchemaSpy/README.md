@@ -1,6 +1,6 @@
 ![Depression Center Logo](https://github.com/DepressionCenter/.github/blob/main/images/EFDCLogo_375w.png "depressioncenter.org")
 
-# Export-MCommunity-Groups.bat
+# Generate Data Dictionaries with SchemaSpy
 
 ## Description
 Batch scripts to generate data dictionaries for databases, R datasets, and Pandas dataframes. This is the companion code to [How to use SchemaSpy to document research datasets](https://teamdynamix.umich.edu/TDClient/210/DepressionCenter/KB/ArticleDet?ID=11889).
