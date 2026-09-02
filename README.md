@@ -3,7 +3,9 @@
 # Mobile Tech Core - Internal Tools & Automation
 
 ## Description
-Code for tools and automation used internally by the Mobile Technologies Core.
+MTC Internal Tools and Automation is an open-source collection of scripts and workflow utilities used by the University of Michigan Mobile Technologies Core. It includes PowerShell, Python, PHP, batch, and Power Automate Desktop examples for GitHub reporting, MCommunity group exports, SharePoint automation, REST endpoints, and administrative tasks.
+
+The repository also includes SchemaSpy launchers for generating data dictionaries from Oracle, SQL Server, SQLite, and R or Pandas CSV sources. Research IT teams and technical administrators can reuse individual tools independently and follow each folder's README for configuration.
 
 
 
